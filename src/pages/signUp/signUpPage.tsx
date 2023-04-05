@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Button, Input, Link } from "../../common";
 import { APP_ROUTES } from "../../constants";
+import { device } from "../../constants/devices";
 
 export function SignUpPage() {
   return (
@@ -27,7 +28,6 @@ const StyledPageSection = styled.section`
 `;
 
 const StyledForm = styled.form`
-  width: 45%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,6 +35,24 @@ const StyledForm = styled.form`
   padding: 30px;
   background-color: ${(props) => props.theme.colors.white};
   border-radius: ${(props) => props.theme.borderRadius.default};
+
+  @media ${device.desktop} {
+    width: 45%;
+  }
+
+  @media ${device.laptop} {
+    width: 70%;
+  }
+
+  @media ${device.tablet} {
+    width: 80%;
+    padding: 20px;
+  }
+
+  @media ${device.mobileS} {
+    width: 95%;
+    padding: 10px;
+  }
 `;
 
 const StyledButton = styled(Button)`
