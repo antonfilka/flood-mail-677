@@ -3,10 +3,10 @@ import { DefaultTheme } from "styled-components";
 export const theme: DefaultTheme = {
   colors: {
     white: "#ffffff",
-    bg: "rgb(21, 20, 20)",
-    onyx: "#36313D",
-    persianGreen: "#9ad4d8",
-    lightBlue: "#afcddb",
+    primary: "#003dda",
+    lightGray: "#f1f1f1",
+    darkGray: "#595959",
+    bg: "#151414",
   },
   fonts: ["sans-serif", "Roboto"],
   fontSizes: {
