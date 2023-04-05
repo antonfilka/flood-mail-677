@@ -2,14 +2,15 @@ import styled from "styled-components";
 import { Button, Input, Link } from "../../common";
 import { APP_ROUTES } from "../../constants";
 
-export function SignInPage() {
+export function SignUpPage() {
   return (
     <StyledPageSection>
       <StyledForm>
         <StyledInput placeholder="Enter email" type="email" />
         <StyledInput placeholder="Enter password" type="password" />
-        <StyledButton>Log In</StyledButton>
-        <Link to={APP_ROUTES.SIGN_UP}>Registration</Link>
+        <StyledInput placeholder="Repeat password" type="password" />
+        <StyledButton>Create Account</StyledButton>
+        <Link to={APP_ROUTES.SIGN_IN}>Back to Log In</Link>
       </StyledForm>
     </StyledPageSection>
   );
