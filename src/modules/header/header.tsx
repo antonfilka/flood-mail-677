@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useStore } from "../../store";
 import { Text } from "../../common";
+import { device } from "../../constants/devices";
 
 export function Header() {
   const userData = useStore((state) => state);
@@ -35,6 +36,22 @@ const StyledContainer = styled.section`
   align-items: center;
   color: ${(props) => props.theme.colors.white};
   background-color: ${(props) => props.theme.colors.bgTransparent};
+
+  @media ${device.desktop} {
+    padding: 15px 50px;
+  }
+
+  @media ${device.laptop} {
+    padding: 15px 35px;
+  }
+
+  @media ${device.tablet} {
+    padding: 10px 20px;
+  }
+
+  @media ${device.mobileS} {
+    padding: 5px 5px;
+  }
 `;
 
 const StyledLogo = styled.section``;

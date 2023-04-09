@@ -1,18 +1,57 @@
 import React from "react";
 import styled from "styled-components";
+import { Text } from "../../common";
 
 interface TransactionItemProps {
   date: string;
-  orderNumber: number;
+  orderNumber?: number;
   price: number;
-  isDeposit: boolean;
 }
 
 export function TransactionItem(props: TransactionItemProps) {
-  const { date, orderNumber, price, isDeposit } = props;
+  const { date, orderNumber, price } = props;
   return (
-    <StyledTransactionItemWrapper>transactionItem</StyledTransactionItemWrapper>
+    <StyledTransactionItemWrapper>
+      <StyledOrderBlock>
+        <StyledDateText>{date}</StyledDateText>
+        {orderNumber ? (
+          <StyledOrderText>Order {orderNumber}</StyledOrderText>
+        ) : (
+          <StyledDepositText>Deposit</StyledDepositText>
+        )}
+      </StyledOrderBlock>
+      {orderNumber ? (
+        <StyledOrderText>- {price}$</StyledOrderText>
+      ) : (
+        <StyledDepositText>+ {price}$</StyledDepositText>
+      )}
+    </StyledTransactionItemWrapper>
   );
 }
 
-const StyledTransactionItemWrapper = styled.section``;
+const StyledTransactionItemWrapper = styled.section`
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: ${(props) => props.theme.colors.lightGray};
+  border-radius: ${(props) => props.theme.borderRadius.default};
+`;
+
+const StyledOrderBlock = styled.section`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledDateText = styled(Text.h3)`
+  margin-right: 20px;
+`;
+
+const StyledOrderText = styled(Text.h3)`
+  color: ${(props) => props.theme.colors.red};
+`;
+
+const StyledDepositText = styled(Text.h3)`
+  color: ${(props) => props.theme.colors.green};
+`;

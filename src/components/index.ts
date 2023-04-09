@@ -3,3 +3,4 @@ export * from "./sectionCard";
 export * from "./accountWrapper";
 export * from "./priceTag";
 export * from "./transactionItem";
+export * from "./priceListItem";

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { AccountWrapper } from "../../components";
+import { device } from "../../constants/devices";
 import { ContactsSection } from "../contacts";
 import { FaqSection } from "../faq";
 import { OrdersSection } from "../orders";
@@ -28,6 +29,18 @@ const StyledTopRow = styled.section`
   height: 70%;
   display: flex;
   gap: 20px;
+
+  @media ${device.laptop} {
+    flex-wrap: wrap;
+  }
+
+  @media ${device.tablet} {
+    flex-wrap: wrap;
+  }
+
+  @media ${device.mobileS} {
+    flex-wrap: wrap;
+  }
 `;
 
 const StyledBottomRow = styled.section`

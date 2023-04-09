@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { PriceTag, SectionCard } from "../../components";
+import { PriceTag, SectionCard, TransactionItem } from "../../components";
 import { useStore } from "../../store";
 import { Button, Input, Text } from "../../common";
+import { device } from "../../constants/devices";
 
 export function ProfileSection() {
   const [priceValue, setPriceValue] = useState<number | undefined>(undefined);
@@ -35,15 +36,28 @@ export function ProfileSection() {
           coinbase
         </Text.h4>
       </StyledPayButton>
-      <StyledTransactionsRow>
-        <StyledTitleText>Transactions history</StyledTitleText>
-      </StyledTransactionsRow>
+      <StyledTitleText>Transactions history</StyledTitleText>
+      <StyledTransactionsList>
+        <TransactionItem date="21.04.03" price={10} />
+        <TransactionItem date="21.04.03" price={21} orderNumber={5179} />
+        <TransactionItem date="21.04.03" price={7} />
+        <TransactionItem date="21.04.03" price={21} orderNumber={5179} />
+        <TransactionItem date="21.04.03" price={7} />
+        <TransactionItem date="21.04.03" price={21} orderNumber={5179} />
+        <TransactionItem date="21.04.03" price={7} />
+        <TransactionItem date="21.04.03" price={21} orderNumber={5179} />
+      </StyledTransactionsList>
     </StyledSectionCard>
   );
 }
 
 const StyledSectionCard = styled(SectionCard)`
   flex-grow: 2;
+
+  @media ${device.tablet} {
+    width: 100%;
+    flex-grow: 1;
+  }
 `;
 
 const StyledNameRow = styled.section`
@@ -62,14 +76,20 @@ const StyledPriceInputRow = styled.section`
   margin-bottom: 15px;
 `;
 
-const StyledTransactionsRow = styled.section`
+const StyledTransactionsList = styled.section`
   max-width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 10px;
+  overflow-y: scroll;
 `;
 
 const StyledTitleText = styled(Text.h3)`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   margin-bottom: 10px;
 `;
 
