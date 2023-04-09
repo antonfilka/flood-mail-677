@@ -7,5 +7,6 @@ export function OrdersSection() {
 }
 
 const StyledSectionCard = styled(SectionCard)`
+  max-width: 100%;
   flex-grow: 2;
 `;

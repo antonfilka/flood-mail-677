@@ -7,5 +7,6 @@ export function TasksSection() {
 }
 
 const StyledSectionCard = styled(SectionCard)`
+  max-width: 100%;
   flex-grow: 4;
 `;

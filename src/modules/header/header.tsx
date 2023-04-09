@@ -1,17 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 import { useStore } from "../../store";
+import { Text } from "../../common";
 
 export function Header() {
   const userData = useStore((state) => state);
 
   return (
     <StyledContainer>
-      <StyledLogo>Header</StyledLogo>
+      <StyledLogo>
+        <Text.h2 color="white">LOGO</Text.h2>
+      </StyledLogo>
       <StyledNavSection>
-        <StyledNavEmail>{userData.email}</StyledNavEmail>
+        <StyledNavEmail>
+          <Text.h4 color="white">{userData.email}</Text.h4>
+        </StyledNavEmail>
         <StyledNavExitButton onClick={userData.logOut}>
-          EXIT
+          <Text.h3 weight={200} color="white">
+            EXIT
+          </Text.h3>
         </StyledNavExitButton>
       </StyledNavSection>
     </StyledContainer>
@@ -41,6 +48,10 @@ const StyledNavSection = styled.section`
 const StyledNavEmail = styled.section``;
 
 const StyledNavExitButton = styled.button`
-  color: ${(props) => props.theme.colors.white};
   background-color: transparent;
+  border: none;
+
+  :hover {
+    cursor: pointer;
+  }
 `;
