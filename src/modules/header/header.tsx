@@ -29,8 +29,8 @@ export function Header() {
 const StyledContainer = styled.section`
   height: 7%;
   width: 100%;
-  padding: 15px 100px;
   position: relative;
+  padding: 15px 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;

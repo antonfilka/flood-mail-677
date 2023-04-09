@@ -26,26 +26,32 @@ export function UserAccount() {
 
 const StyledTopRow = styled.section`
   width: 100%;
-  height: 70%;
+  height: 500px;
   display: flex;
   gap: 20px;
 
   @media ${device.laptop} {
     flex-wrap: wrap;
+    height: unset;
   }
 
   @media ${device.tablet} {
-    flex-wrap: wrap;
-  }
-
-  @media ${device.mobileS} {
-    flex-wrap: wrap;
+    height: unset;
   }
 `;
 
 const StyledBottomRow = styled.section`
   width: 100%;
-  height: 30%;
   display: flex;
+  height: 150px;
   gap: 20px;
+
+  @media ${device.laptop} {
+    flex-wrap: wrap;
+    height: unset;
+  }
+
+  @media ${device.tablet} {
+    height: unset;
+  }
 `;

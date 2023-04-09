@@ -3,14 +3,15 @@ import { device } from "../../constants/devices";
 
 export const AccountWrapper = styled.section`
   width: 100%;
-  height: 100%;
+  padding: 50px 100px;
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   gap: 20px;
-  padding: 50px 100px;
+  overflow-y: auto;
 
   @media ${device.desktop} {
-    padding: 30px 50px;
+    padding: 30px 40px;
   }
 
   @media ${device.laptop} {

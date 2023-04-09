@@ -60,9 +60,7 @@ export function OrdersSection() {
         ))}
       </StyledPriceList>
 
-      <StyledCreateTaskButton onClick={createTaskButtonClickHandler}>
-        Create task
-      </StyledCreateTaskButton>
+      <Button onClick={createTaskButtonClickHandler}>Create task</Button>
     </StyledSectionCard>
   );
 }
@@ -70,6 +68,7 @@ export function OrdersSection() {
 const StyledSectionCard = styled(SectionCard)`
   max-width: 100%;
   flex-grow: 2;
+  justify-content: space-between;
 
   @media ${device.tablet} {
     width: 100%;
@@ -82,21 +81,22 @@ const StyledHeaderText = styled(Text.h2)`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 `;
 
 const StyledEmailInput = styled(Input)`
-  margin-bottom: 15px;
-`;
-
-const StyledCreateTaskButton = styled(Button)`
-  margin-top: auto;
+  margin-bottom: 10px;
 `;
 
 const StyledPriceList = styled.section`
   width: 100%;
+  max-height: 60%;
+  padding: 2px;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
+  overflow-y: auto;
+  margin-bottom: 15px;
 `;

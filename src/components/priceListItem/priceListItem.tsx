@@ -20,7 +20,7 @@ export function PriceListItem(props: PriceListItemProps) {
     >
       <StyledTextRow>
         <Text.h3>{amount} </Text.h3>
-        <Text.h3> - </Text.h3>
+        <Text.h3>&nbsp; - &nbsp; </Text.h3>
         <Text.h3> {price}$</Text.h3>
       </StyledTextRow>
     </StyledPriceListItemWrapper>
