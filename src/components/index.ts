@@ -4,3 +4,4 @@ export * from "./accountWrapper";
 export * from "./priceTag";
 export * from "./transactionItem";
 export * from "./priceListItem";
+export * from "./taskItem";
