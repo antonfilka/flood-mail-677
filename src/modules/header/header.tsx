@@ -10,7 +10,9 @@ export function Header() {
       <StyledLogo>Header</StyledLogo>
       <StyledNavSection>
         <StyledNavEmail>{userData.email}</StyledNavEmail>
-        <StyledNavExitButton>EXIT</StyledNavExitButton>
+        <StyledNavExitButton onClick={userData.logOut}>
+          EXIT
+        </StyledNavExitButton>
       </StyledNavSection>
     </StyledContainer>
   );

@@ -7,5 +7,5 @@ export function ContactsSection() {
 }
 
 const StyledSectionCard = styled(SectionCard)`
-  flex-grow: 1;
+  flex-grow: 2;
 `;

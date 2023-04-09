@@ -7,5 +7,5 @@ export function FaqSection() {
 }
 
 const StyledSectionCard = styled(SectionCard)`
-  flex-grow: 5.8;
+  flex-grow: 7;
 `;
