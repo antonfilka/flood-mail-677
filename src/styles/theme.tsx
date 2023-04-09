@@ -7,6 +7,7 @@ export const theme: DefaultTheme = {
     lightGray: "#f1f1f1",
     darkGray: "#595959",
     bg: "#151414",
+    bgTransparent: "rgba(0, 0, 0, 0.2)",
   },
   fonts: ["sans-serif", "Roboto"],
   fontSizes: {

@@ -1,58 +1,33 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Button, Input, Link } from "../../common";
+import { Button, Input, Link, PageSection } from "../../common";
+import { SignPageForm } from "../../components";
 import { APP_ROUTES } from "../../constants";
-import { device } from "../../constants/devices";
+import { useStore } from "../../store";
 
 export function SignInPage() {
+  const userSignIn = useStore((state) => state.userSignIn);
+  const navigate = useNavigate();
+
+  const logInButtonClickHandler = () => {
+    userSignIn({
+      email: "anton.filippovich.m@gmail.com",
+      username: "antofilka",
+    });
+    navigate(APP_ROUTES.HOME_PAGE);
+  };
+
   return (
-    <StyledPageSection>
-      <StyledForm>
+    <PageSection>
+      <SignPageForm>
         <StyledInput placeholder="Enter email" type="email" />
         <StyledInput placeholder="Enter password" type="password" />
-        <StyledButton>Log In</StyledButton>
+        <StyledButton onClick={logInButtonClickHandler}>Log In</StyledButton>
         <Link to={APP_ROUTES.SIGN_UP}>Registration</Link>
-      </StyledForm>
-    </StyledPageSection>
+      </SignPageForm>
+    </PageSection>
   );
 }
-
-const StyledPageSection = styled.section`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: red;
-`;
-
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  padding: 30px;
-  background-color: ${(props) => props.theme.colors.white};
-  border-radius: ${(props) => props.theme.borderRadius.default};
-
-  @media ${device.desktop} {
-    width: 45%;
-  }
-
-  @media ${device.laptop} {
-    width: 70%;
-  }
-
-  @media ${device.tablet} {
-    width: 80%;
-    padding: 20px;
-  }
-
-  @media ${device.mobileS} {
-    width: 95%;
-    padding: 10px;
-  }
-`;
 
 const StyledButton = styled(Button)`
   margin: 10px 0;

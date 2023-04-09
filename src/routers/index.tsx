@@ -8,6 +8,7 @@ export function MainRouter() {
     <Routes>
       <Route path={APP_ROUTES.SIGN_IN} element={<SignInPage />} />
       <Route path={APP_ROUTES.SIGN_UP} element={<SignUpPage />} />
+      <Route path={APP_ROUTES.HOME_PAGE} element={<HomePage />} />
     </Routes>
   );
 }
