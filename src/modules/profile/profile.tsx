@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { PriceTag, SectionCard, TransactionItem } from "../../components";
 import { useStore } from "../../store";
-import { Button, Input, Text } from "../../common";
+import { Button, HeaderText, Input, Text } from "../../common";
 import { device } from "../../constants/devices";
 
 export function ProfileSection() {
@@ -21,7 +21,7 @@ export function ProfileSection() {
         <PriceTag price={44.44} />
       </StyledNameRow>
       <StyledPriceInputRow>
-        <StyledTitleText>Enter value</StyledTitleText>
+        <HeaderText>Enter value</HeaderText>
         <Input
           $border
           placeholder="$"
@@ -36,7 +36,7 @@ export function ProfileSection() {
           coinbase
         </Text.h4>
       </StyledPayButton>
-      <StyledTitleText>Transactions history</StyledTitleText>
+      <HeaderText>Transactions history</HeaderText>
       <StyledTransactionsList>
         <TransactionItem date="21.04.03" price={10} />
         <TransactionItem date="21.04.03" price={21} orderNumber={5179} />
@@ -52,11 +52,8 @@ export function ProfileSection() {
 }
 
 const StyledSectionCard = styled(SectionCard)`
-  flex-grow: 2;
-
-  @media ${device.tablet} {
-    width: 100%;
-    flex-grow: 1;
+  @media ${device.laptop} {
+    min-height: 70vh;
   }
 `;
 
@@ -83,14 +80,6 @@ const StyledTransactionsList = styled.section`
   align-items: flex-start;
   gap: 10px;
   overflow-y: scroll;
-`;
-
-const StyledTitleText = styled(Text.h3)`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-bottom: 10px;
 `;
 
 const StyledPayButton = styled(Button)`

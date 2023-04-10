@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { SectionCard, TaskItem } from "../../components";
+import { HeaderText } from "../../common";
 import { device } from "../../constants/devices";
-import { Text } from "../../common";
 
 const Tasks = [
   {
@@ -28,8 +28,7 @@ const Tasks = [
 export function TasksSection() {
   return (
     <StyledSectionCard>
-      <StyledHeaderText>Tasks</StyledHeaderText>
-
+      <HeaderText>Tasks</HeaderText>
       <StyledTasksList>
         {Tasks.map((task) => (
           <TaskItem key={task.id} {...task} />
@@ -40,21 +39,11 @@ export function TasksSection() {
 }
 
 const StyledSectionCard = styled(SectionCard)`
-  max-width: 100%;
-  flex-grow: 4;
+  flex-grow: 3;
 
-  @media ${device.tablet} {
-    width: 100%;
-    flex-grow: 1;
+  @media ${device.laptop} {
+    min-height: 70vh;
   }
-`;
-
-const StyledHeaderText = styled(Text.h2)`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-bottom: 10px;
 `;
 
 const StyledTasksList = styled.section`

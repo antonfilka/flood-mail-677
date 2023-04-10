@@ -13,13 +13,11 @@ export const theme: DefaultTheme = {
   },
   fonts: ["sans-serif", "Roboto"],
   fontSizes: {
-    p: "0.3em",
-    h6: "0.5em",
-    h5: "0.8em",
-    h4: "1em",
-    h3: "1.5em",
-    h2: "2em",
-    h1: "2.5em",
+    p: "1rem",
+    h4: "1rem",
+    h3: "1.17rem",
+    h2: "1.5rem",
+    h1: "2rem",
   },
   borderRadius: {
     default: "5px",

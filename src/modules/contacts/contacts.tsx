@@ -1,36 +1,37 @@
 import React from "react";
 import styled from "styled-components";
 import { SectionCard } from "../../components";
+import { HeaderText, Text } from "../../common";
 import { device } from "../../constants/devices";
-import { Text } from "../../common";
 
 export function ContactsSection() {
   return (
     <StyledSectionCard>
-      <StyledHeaderText>Contacts</StyledHeaderText>
-      <StyledContactRow>
-        <Text.h3 weight={600}>Email: &nbsp;</Text.h3>
-        <StyledLink href={`mailto:contact.email@gmail.com`}>
-          <Text.h3>contact.email@gmail.com</Text.h3>
-        </StyledLink>
-      </StyledContactRow>
-      <StyledContactRow>
-        <Text.h3 weight={600}>Telegram: &nbsp;</Text.h3>
-        <StyledLink href={`https://telegram.org/`} target="_blank">
-          <Text.h3>flood-mail</Text.h3>
-        </StyledLink>
-      </StyledContactRow>
+      <HeaderText>Contacts</HeaderText>
+      <StyledContactsList>
+        <StyledContactRow>
+          <Text.h4 weight={600}>Email: &nbsp;</Text.h4>
+          <StyledLink href={`mailto:contact.email@gmail.com`}>
+            <Text.h4>contact.email@gmail.com</Text.h4>
+          </StyledLink>
+        </StyledContactRow>
+        <StyledContactRow>
+          <Text.h4 weight={600}>Telegram: &nbsp;</Text.h4>
+          <StyledLink href={`https://telegram.org/`} target="_blank">
+            <Text.h4>flood-mail</Text.h4>
+          </StyledLink>
+        </StyledContactRow>
+      </StyledContactsList>
     </StyledSectionCard>
   );
 }
 
 const StyledSectionCard = styled(SectionCard)`
-  min-width: 480px;
-  flex-grow: 5;
+  max-height: 140px;
+  min-height: 140px;
 
-  @media ${device.tablet} {
-    width: 100%;
-    flex-grow: 1;
+  @media ${device.laptop} {
+    min-height: 20vh;
   }
 `;
 
@@ -38,12 +39,17 @@ const StyledLink = styled.a`
   text-decoration: none;
 `;
 
-const StyledHeaderText = styled(Text.h2)`
+const StyledContactsList = styled.section`
   width: 100%;
+  height: 100%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: flex-start;
-  margin-bottom: 10px;
+  gap: 5px;
+
+  @media ${device.laptop} {
+    overflow-y: auto;
+  }
 `;
 
 const StyledContactRow = styled.section`
@@ -51,5 +57,4 @@ const StyledContactRow = styled.section`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-bottom: 10px;
 `;

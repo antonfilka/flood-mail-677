@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { PriceListItem, SectionCard } from "../../components";
 import { device } from "../../constants/devices";
-import { Button, Input, Text } from "../../common";
+import { Button, HeaderText, Input, Text } from "../../common";
 
 const PriceListItems = [
   {
@@ -38,7 +38,7 @@ export function OrdersSection() {
 
   return (
     <StyledSectionCard>
-      <StyledHeaderText>Make order</StyledHeaderText>
+      <HeaderText>Make order</HeaderText>
       <StyledEmailInput
         $border
         placeholder="Enter email"
@@ -46,7 +46,7 @@ export function OrdersSection() {
         value={targetEmail}
         onChange={(e) => setTargetEmail(e.target.value)}
       />
-      <StyledHeaderText>Price List</StyledHeaderText>
+      <HeaderText>Price List</HeaderText>
       <StyledPriceList>
         {PriceListItems.map((item) => (
           <PriceListItem
@@ -66,22 +66,11 @@ export function OrdersSection() {
 }
 
 const StyledSectionCard = styled(SectionCard)`
-  max-width: 100%;
-  flex-grow: 2;
-  justify-content: space-between;
+  flex-grow: 1;
 
-  @media ${device.tablet} {
-    width: 100%;
-    flex-grow: 1;
+  @media ${device.laptop} {
+    min-height: 65vh;
   }
-`;
-
-const StyledHeaderText = styled(Text.h2)`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-bottom: 10px;
 `;
 
 const StyledEmailInput = styled(Input)`

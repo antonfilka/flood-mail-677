@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { FaqItem, SectionCard } from "../../components";
-import { device } from "../../constants/devices";
-import { Text } from "../../common";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 import "swiper/css";
@@ -35,7 +33,6 @@ const FAQS = [
 export function FaqSection() {
   return (
     <StyledSectionCard>
-      {/* <StyledHeaderText>FAQ</StyledHeaderText> */}
       <StyledSwiperWrapper>
         <StyledSwiper
           slidesPerView={1}
@@ -60,21 +57,8 @@ export function FaqSection() {
 }
 
 const StyledSectionCard = styled(SectionCard)`
-  max-width: 1200px;
-  flex-grow: 7;
-
-  @media ${device.tablet} {
-    width: 100%;
-    flex-grow: 1;
-  }
-`;
-
-const StyledHeaderText = styled(Text.h2)`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-bottom: 10px;
+  max-height: 140px;
+  min-height: 140px;
 `;
 
 const StyledSwiperWrapper = styled.section`
@@ -86,9 +70,11 @@ const StyledSwiperWrapper = styled.section`
 
 const StyledSwiper = styled(Swiper)`
   .swiper-button-next {
+    --swiper-navigation-size: 25px;
     color: ${(props) => props.theme.colors.bg};
   }
   .swiper-button-prev {
+    --swiper-navigation-size: 25px;
     color: ${(props) => props.theme.colors.bg};
   }
   .swiper-pagination-bullet-active {
