@@ -11,8 +11,8 @@ export function SignInPage() {
 
   const logInButtonClickHandler = () => {
     userSignIn({
-      email: "anton.filippovich.m@gmail.com",
-      username: "antofilka",
+      email: "username.email@gmail.com",
+      username: "Username",
     });
     navigate(APP_ROUTES.HOME_PAGE);
   };
