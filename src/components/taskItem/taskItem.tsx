@@ -1,3 +1,5 @@
+import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import styled from "styled-components";
 import { Text } from "../../common";
@@ -13,9 +15,17 @@ export function TaskItem(props: TaskItemProps) {
 
   return (
     <StyledTaskItemWrapper>
-      <Text.h4 weight={600}>Task {number}</Text.h4>
-      <Text.h4>{description}</Text.h4>
-      <Text.h4 weight={600}>{isActive ? "On" : "Off"}</Text.h4>
+      <StyledTitleText>
+        <Text.h4 weight={600}>Task {number} &nbsp;</Text.h4>
+        <Text.h4>{description}</Text.h4>
+      </StyledTitleText>
+      <Text.h4 weight={600}>
+        {isActive ? (
+          <StyledIconButton icon={faPause} />
+        ) : (
+          <StyledIconButton icon={faPlay} />
+        )}
+      </Text.h4>
     </StyledTaskItemWrapper>
   );
 }
@@ -32,5 +42,18 @@ const StyledTaskItemWrapper = styled.section`
 
   :hover {
     outline: 2px solid ${(props) => props.theme.colors.primary};
+  }
+`;
+
+const StyledTitleText = styled.section`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledIconButton = styled(FontAwesomeIcon)`
+  margin-right: 5px;
+
+  :hover {
+    cursor: pointer;
   }
 `;

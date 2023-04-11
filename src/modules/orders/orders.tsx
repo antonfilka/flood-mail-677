@@ -67,6 +67,7 @@ export function OrdersSection() {
 
 const StyledSectionCard = styled(SectionCard)`
   flex-grow: 1;
+  flex-shrink: 1.5;
 
   @media ${device.laptop} {
     min-height: 65vh;

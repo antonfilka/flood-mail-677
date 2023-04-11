@@ -4,9 +4,16 @@ import { MainRouter } from "../../routers";
 import { PurpleWaves } from "../../common/purpleWaves/purpleWaves";
 import { device } from "../../constants/devices";
 import { useStore } from "../../store";
+import { useEffect, useState } from "react";
 
 export function MainLayout() {
   const isAuthorized = useStore((state) => state.isAuthorized);
+
+  useEffect(() => {
+    console.info(
+      `Hi, I'm FullStack JavaScript developer. \nContact me: antonfilippovich.job@gmail.com`
+    );
+  }, []);
 
   return (
     <StyledContainer>

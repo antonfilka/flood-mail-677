@@ -39,7 +39,7 @@ export function TasksSection() {
 }
 
 const StyledSectionCard = styled(SectionCard)`
-  flex-grow: 3;
+  flex-grow: 6;
 
   @media ${device.laptop} {
     min-height: 70vh;
