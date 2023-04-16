@@ -1,4 +1,4 @@
-import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faPause, faPlay, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import styled from "styled-components";
@@ -8,10 +8,12 @@ interface TaskItemProps {
   number: number;
   description: string;
   isActive: boolean;
+  isFinished?: boolean;
+  adminTask?: boolean;
 }
 
 export function TaskItem(props: TaskItemProps) {
-  const { number, description, isActive } = props;
+  const { number, description, isActive, adminTask, isFinished } = props;
 
   return (
     <StyledTaskItemWrapper>
@@ -19,13 +21,12 @@ export function TaskItem(props: TaskItemProps) {
         <Text.h4 weight={600}>Task {number} &nbsp;</Text.h4>
         <Text.h4>{description}</Text.h4>
       </StyledTitleText>
-      <Text.h4 weight={600}>
-        {isActive ? (
-          <StyledIconButton icon={faPause} />
-        ) : (
-          <StyledIconButton icon={faPlay} />
-        )}
-      </Text.h4>
+      <StyledIconsContainer>
+        {isActive
+          ? !isFinished && <StyledIconButton icon={faPause} />
+          : !isFinished && <StyledIconButton icon={faPlay} />}
+        {adminTask && <StyledIconButton icon={faTrash} />}
+      </StyledIconsContainer>
     </StyledTaskItemWrapper>
   );
 }
@@ -48,6 +49,12 @@ const StyledTaskItemWrapper = styled.section`
 const StyledTitleText = styled.section`
   display: flex;
   align-items: center;
+`;
+
+const StyledIconsContainer = styled.section`
+  display: flex;
+  align-items: center;
+  gap: 20px;
 `;
 
 const StyledIconButton = styled(FontAwesomeIcon)`

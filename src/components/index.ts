@@ -6,3 +6,4 @@ export * from "./transactionItem";
 export * from "./priceListItem";
 export * from "./taskItem";
 export * from "./faqItem";
+export * from "./adminTransactionItem";

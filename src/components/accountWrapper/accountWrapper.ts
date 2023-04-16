@@ -3,6 +3,7 @@ import { device } from "../../constants/devices";
 
 export const AccountWrapper = styled.section`
   max-width: 100vw;
+  height: 100%;
   width: 100%;
   display: flex;
   align-items: flex-start;
