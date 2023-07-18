@@ -38,8 +38,8 @@ export function ProfileSection(props: ProfileSectionProps) {
           amount: `${data.price}`,
           currency: "usd",
         },
-        redirect_url: "http://localhost:5173/home",
-        cancel_url: "http://localhost:5173/home",
+        redirect_url: "https://flood-mail.web.app/home",
+        cancel_url: "https://flood-mail.web.app/home",
       },
       access_token,
     });

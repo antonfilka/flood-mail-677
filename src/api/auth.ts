@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const domain = "https://8a1d-46-53-246-51.ngrok-free.app";
+// const domain = "https://8a1d-46-53-246-51.ngrok-free.app";
+const domain = "http://localhost:8080";
 
 export const signUpMutationFunc = (payload: SignUpPayload) =>
   axios.post(`${domain}/auth/sing-up`, payload).then((res) => res.data);
@@ -14,7 +15,10 @@ export const makePaymentMutationFunc = (data: {
 }) =>
   axios
     .post<PaymentMutationResponse>(`${domain}/payment`, data.payload, {
-      headers: { Authorization: `Bearer ${data.access_token}` },
+      headers: {
+        Authorization: `Bearer ${data.access_token}`,
+        "ngrok-skip-browser-warning": "69420",
+      },
     })
     .then((res) => res.data);
 
@@ -24,28 +28,40 @@ export const startFloodMutationFunc = (data: {
 }) =>
   axios
     .post(`${domain}/flood`, data.payload, {
-      headers: { Authorization: `Bearer ${data.access_token}` },
+      headers: {
+        Authorization: `Bearer ${data.access_token}`,
+        "ngrok-skip-browser-warning": "69420",
+      },
     })
     .then((res) => res.data);
 
 export const getUserDataQueryFunc = (access_token: string) =>
   axios
     .get<UserData>(`${domain}/profile`, {
-      headers: { Authorization: `Bearer ${access_token}` },
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+        "ngrok-skip-browser-warning": "69420",
+      },
     })
     .then((res) => res.data);
 
 export const getTasksQueryFunc = (access_token: string) =>
   axios
     .get<Tasks>(`${domain}/tasks`, {
-      headers: { Authorization: `Bearer ${access_token}` },
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+        "ngrok-skip-browser-warning": "69420",
+      },
     })
     .then((res) => res.data);
 
 export const getPaymentsQueryFunc = (access_token: string) =>
   axios
     .get<PaymentsForAdmin>(`${domain}/payments`, {
-      headers: { Authorization: `Bearer ${access_token}` },
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+        "ngrok-skip-browser-warning": "69420",
+      },
     })
     .then((res) => res.data);
 
@@ -59,7 +75,10 @@ export const putPaymentByIdQueryFunc = (payload: {
       `${domain}/payment/${payload.paymentId}`,
       { user_id: payload.userId },
       {
-        headers: { Authorization: `Bearer ${payload.access_token}` },
+        headers: {
+          Authorization: `Bearer ${payload.access_token}`,
+          "ngrok-skip-browser-warning": "69420",
+        },
       }
     )
     .then((res) => res.data);
@@ -75,7 +94,10 @@ export const putTaskByIdQueryFunc = (payload: {
       `${domain}/task/${payload.taskId}`,
       { user_id: payload.userId, status: payload.status },
       {
-        headers: { Authorization: `Bearer ${payload.access_token}` },
+        headers: {
+          Authorization: `Bearer ${payload.access_token}`,
+          "ngrok-skip-browser-warning": "69420",
+        },
       }
     )
     .then((res) => res.data);
@@ -88,7 +110,10 @@ export const deleteTaskByIdQueryFunc = (payload: {
   axios
     .delete(`${domain}/task/${payload.taskId}`, {
       data: { user_id: payload.userId },
-      headers: { Authorization: `Bearer ${payload.access_token}` },
+      headers: {
+        Authorization: `Bearer ${payload.access_token}`,
+        "ngrok-skip-browser-warning": "69420",
+      },
     })
     .then((res) => res.data);
 
