@@ -12,7 +12,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 
 const schema = z.object({
-  email: z.string().email({ message: "Email must be valid" }),
+  email: z.string(),
   password: z
     .string()
     .min(8, { message: "Password must be at least 8 characters long" }),
