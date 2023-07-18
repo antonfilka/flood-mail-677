@@ -1,11 +1,16 @@
 import { faPause, faPlay, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useMutation } from "@tanstack/react-query";
 import React from "react";
 import styled from "styled-components";
+import { queryClient } from "../../api";
+import { deleteTaskByIdQueryFunc, putTaskByIdQueryFunc } from "../../api/auth";
 import { Text } from "../../common";
+import { useStore } from "../../store";
 
 interface TaskItemProps {
   number: number;
+  userId: string;
   description: string;
   isActive: boolean;
   isFinished?: boolean;
@@ -13,7 +18,39 @@ interface TaskItemProps {
 }
 
 export function TaskItem(props: TaskItemProps) {
-  const { number, description, isActive, adminTask, isFinished } = props;
+  const { number, description, isActive, adminTask, isFinished, userId } =
+    props;
+
+  const access_token = useStore((state) => state.access_token);
+
+  const putTask = useMutation({
+    mutationKey: ["tasks"],
+    mutationFn: putTaskByIdQueryFunc,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      console.log("Make task put successful");
+    },
+  });
+
+  const deleteTask = useMutation({
+    mutationKey: ["tasks"],
+    mutationFn: deleteTaskByIdQueryFunc,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      console.log("Make task delete successful");
+    },
+  });
+
+  const onPauseClick = () => {
+    console.log(userId);
+    putTask.mutate({ access_token, userId, taskId: number, status: "stop" });
+  };
+  const onStartClick = () => {
+    putTask.mutate({ access_token, userId, taskId: number, status: "start" });
+  };
+  const onDeleteClick = () => {
+    deleteTask.mutate({ access_token, userId, taskId: number });
+  };
 
   return (
     <StyledTaskItemWrapper>
@@ -23,9 +60,29 @@ export function TaskItem(props: TaskItemProps) {
       </StyledTitleText>
       <StyledIconsContainer>
         {isActive
-          ? !isFinished && <StyledIconButton icon={faPause} />
-          : !isFinished && <StyledIconButton icon={faPlay} />}
-        {adminTask && <StyledIconButton icon={faTrash} />}
+          ? !isFinished &&
+            !adminTask && (
+              <StyledIconButton
+                icon={faPause}
+                onClick={onPauseClick}
+                title="Pause"
+              />
+            )
+          : !isFinished &&
+            !adminTask && (
+              <StyledIconButton
+                icon={faPlay}
+                onClick={onStartClick}
+                title="Start"
+              />
+            )}
+        {adminTask && (
+          <StyledIconButton
+            icon={faTrash}
+            onClick={onDeleteClick}
+            title="Delete"
+          />
+        )}
       </StyledIconsContainer>
     </StyledTaskItemWrapper>
   );

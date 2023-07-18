@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { UserData } from "../../api/auth";
 import { AccountWrapper } from "../../components";
 import { device } from "../../constants/devices";
 import useMediaQuery from "../../hooks/useMediaQuery";
@@ -9,14 +10,20 @@ import { OrdersSection } from "../orders";
 import { ProfileSection } from "../profile";
 import { TasksSection } from "../tasks";
 
-export function UserAccount() {
+interface UserAccountProps {
+  userData: UserData | undefined;
+}
+
+export function UserAccount(props: UserAccountProps) {
+  const { userData } = props;
+
   const isMobile = useMediaQuery(device.laptop);
 
   return (
     <>
       {isMobile ? (
         <AccountWrapper>
-          <ProfileSection />
+          <ProfileSection userData={userData} />
           <OrdersSection />
           <TasksSection />
           <FaqSection />
@@ -25,7 +32,7 @@ export function UserAccount() {
       ) : (
         <AccountWrapper>
           <StyledProfileColumn>
-            <ProfileSection />
+            <ProfileSection userData={userData} />
             <ContactsSection />
           </StyledProfileColumn>
           <StyledOrdersColumn>

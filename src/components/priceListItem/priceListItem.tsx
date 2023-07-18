@@ -7,19 +7,19 @@ interface PriceListItemProps {
   amount: number;
   price: number;
   isSelected: boolean;
-  setSelectedPrice: Dispatch<SetStateAction<number | null | undefined>>;
+  setSelectedPriceId: (id: number) => void;
 }
 
 export function PriceListItem(props: PriceListItemProps) {
-  const { id, amount, price, isSelected, setSelectedPrice } = props;
+  const { id, amount, price, isSelected, setSelectedPriceId } = props;
 
   return (
     <StyledPriceListItemWrapper
       $isSelected={isSelected}
-      onClick={() => setSelectedPrice(id)}
+      onClick={() => setSelectedPriceId(id)}
     >
       <StyledTextRow>
-        <Text.h3>{amount} </Text.h3>
+        <Text.h3>{amount} min</Text.h3>
         <Text.h3>&nbsp; - &nbsp; </Text.h3>
         <Text.h3> {price}$</Text.h3>
       </StyledTextRow>

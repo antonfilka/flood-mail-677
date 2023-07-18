@@ -3,64 +3,132 @@ import styled from "styled-components";
 import { PriceListItem, SectionCard } from "../../components";
 import { device } from "../../constants/devices";
 import { Button, HeaderText, Input, Text } from "../../common";
+import { useMutation } from "@tanstack/react-query";
+import { startFloodMutationFunc } from "../../api/auth";
+import { useStore } from "../../store";
+import { queryClient } from "../../api";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { schema } from "./validation.schema";
+
+export interface PriceListItem {
+  id: number;
+  time: number;
+  price: number;
+}
 
 const PriceListItems = [
   {
     id: 1,
-    amount: 100,
+    time: 1,
     price: 1,
   },
   {
     id: 2,
-    amount: 500,
+    time: 5,
     price: 5,
   },
   {
     id: 3,
-    amount: 1000,
+    time: 100,
     price: 10,
   },
   {
     id: 4,
-    amount: 2000,
+    time: 200,
     price: 20,
   },
 ];
 
-export function OrdersSection() {
-  const [targetEmail, setTargetEmail] = useState<string>("");
-  const [selectedPrice, setSelectedPrice] = useState<number | null>();
+const formOptions = {
+  resolver: zodResolver(schema),
+};
 
-  const createTaskButtonClickHandler = () => {
-    setTargetEmail("");
-    setSelectedPrice(null);
+interface Inputs {
+  email: string;
+}
+
+export function OrdersSection() {
+  const [selectedPriceId, setSelectedPriceId] = useState<number | null>(null);
+  const [isSelectError, setIsSelectError] = useState(false);
+  const [lowBalance, setLowBalance] = useState(false);
+  const access_token = useStore((state) => state.access_token);
+
+  const createTaskButtonClickHandler: SubmitHandler<Inputs> = (data) => {
+    if (!selectedPriceId) {
+      setIsSelectError(true);
+      return;
+    }
+    const option = PriceListItems.find((item) => item.id === selectedPriceId);
+    flood.mutate({
+      payload: {
+        Email: data.email.trim(),
+        Time: option?.time || 1,
+        price: option?.price || 1,
+      },
+      access_token,
+    });
   };
+
+  const flood = useMutation({
+    mutationKey: ["userData"],
+    mutationFn: startFloodMutationFunc,
+    onSuccess: () => {
+      setSelectedPriceId(null);
+      setIsSelectError(false);
+      setLowBalance(false);
+      reset();
+      queryClient.invalidateQueries({ queryKey: ["userData", "tasks"] });
+      console.log("Flood start successful");
+    },
+    onError: (error: any) => {
+      if (error?.response.data.error === "low balance") setLowBalance(true);
+    },
+  });
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<Inputs>(formOptions);
 
   return (
     <StyledSectionCard>
       <HeaderText>Make order</HeaderText>
-      <StyledEmailInput
-        $border
-        placeholder="Enter email"
-        type="email"
-        value={targetEmail}
-        onChange={(e) => setTargetEmail(e.target.value)}
-      />
-      <HeaderText>Price List</HeaderText>
-      <StyledPriceList>
+
+      <StyledPriceList onSubmit={handleSubmit(createTaskButtonClickHandler)}>
+        <StyledEmailInput
+          $border
+          placeholder="Enter email"
+          type="email"
+          {...register("email", { required: true })}
+        />
+        {errors.email && (
+          <StyledErrorText>{errors.email.message}</StyledErrorText>
+        )}
+
+        <HeaderText>Price List</HeaderText>
         {PriceListItems.map((item) => (
           <PriceListItem
             key={item.id}
             id={item.id}
             price={item.price}
-            amount={item.amount}
-            isSelected={selectedPrice === item.id}
-            setSelectedPrice={setSelectedPrice}
+            amount={item.time}
+            isSelected={selectedPriceId === item.id}
+            setSelectedPriceId={setSelectedPriceId}
           />
         ))}
+        {isSelectError && (
+          <StyledErrorText>Choose flood option</StyledErrorText>
+        )}
+        {lowBalance && (
+          <StyledErrorText>
+            Balance is low. Top up your balance to choose this option
+          </StyledErrorText>
+        )}
+        <StyledSubmitButton type="submit">Create task</StyledSubmitButton>
       </StyledPriceList>
-
-      <Button onClick={createTaskButtonClickHandler}>Create task</Button>
     </StyledSectionCard>
   );
 }
@@ -78,9 +146,13 @@ const StyledEmailInput = styled(Input)`
   margin-bottom: 10px;
 `;
 
-const StyledPriceList = styled.section`
+const StyledSubmitButton = styled(Button)`
+  margin-top: auto;
+`;
+
+const StyledPriceList = styled.form`
   width: 100%;
-  max-height: 60%;
+  height: 100%;
   padding: 2px;
   flex-grow: 1;
   display: flex;
@@ -89,4 +161,9 @@ const StyledPriceList = styled.section`
   gap: 10px;
   overflow-y: auto;
   margin-bottom: 15px;
+`;
+
+const StyledErrorText = styled.p`
+  float: center;
+  color: ${(props) => props.theme.colors.red};
 `;

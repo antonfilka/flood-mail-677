@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { SectionCard, TaskItem } from "../../components";
 import { HeaderText } from "../../common";
 import { device } from "../../constants/devices";
+import { useStore } from "../../store";
+import { useQuery } from "@tanstack/react-query";
+import { getTasksQueryFunc } from "../../api/auth";
 
 const Tasks = [
   {
@@ -27,13 +30,28 @@ const Tasks = [
 ];
 
 export function ManageOrdersSection() {
+  const access_token = useStore((state) => state.access_token);
+
+  const tasks = useQuery({
+    queryKey: ["tasks"],
+    queryFn: () => getTasksQueryFunc(access_token),
+  });
+
   return (
     <StyledSectionCard>
       <HeaderText>Manage Orders</HeaderText>
       <StyledTasksList>
-        {Tasks.map((task) => (
-          <TaskItem key={task.id} {...task} adminTask />
-        ))}
+        {tasks.data?.["tasks:"] &&
+          tasks.data?.["tasks:"].map((task) => (
+            <TaskItem
+              key={task.Email + task.Time}
+              number={task.Id}
+              userId={task.UserID}
+              description={`${task.Email} / ${task.Time} min`}
+              isActive={task.Status === "in_progress"}
+              adminTask
+            />
+          ))}
       </StyledTasksList>
     </StyledSectionCard>
   );

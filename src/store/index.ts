@@ -6,6 +6,8 @@ export interface StoreInterface {
   isAdmin: boolean;
   username: string;
   email: string;
+  access_token: string;
+  refresh_token: string;
   userSignIn: (payload: UserSignIn) => void;
   adminSignIn: (payload: UserSignIn) => void;
   logOut: () => void;
@@ -18,6 +20,8 @@ export const useStore = create<StoreInterface>()(
       isAdmin: false,
       username: "",
       email: "",
+      access_token: "",
+      refresh_token: "",
       userSignIn: (payload) =>
         set({
           isAuthorized: true,
@@ -27,7 +31,14 @@ export const useStore = create<StoreInterface>()(
       adminSignIn: (payload) =>
         set({ isAuthorized: true, isAdmin: true, ...payload }),
       logOut: () =>
-        set({ isAuthorized: false, isAdmin: false, username: "", email: "" }),
+        set({
+          isAuthorized: false,
+          isAdmin: false,
+          username: "",
+          email: "",
+          access_token: "",
+          refresh_token: "",
+        }),
     }),
     {
       name: "user-storage",
@@ -36,6 +47,7 @@ export const useStore = create<StoreInterface>()(
 );
 
 interface UserSignIn {
-  username: string;
   email: string;
+  access_token: string;
+  refresh_token: string;
 }

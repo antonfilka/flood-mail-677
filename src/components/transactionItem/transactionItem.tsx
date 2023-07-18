@@ -5,11 +5,12 @@ import { Text } from "../../common";
 interface TransactionItemProps {
   date: string;
   orderNumber?: number;
+  status?: string;
   price: number;
 }
 
 export function TransactionItem(props: TransactionItemProps) {
-  const { date, orderNumber, price } = props;
+  const { date, orderNumber, status, price } = props;
   return (
     <StyledTransactionItemWrapper>
       <StyledOrderBlock>
@@ -20,10 +21,12 @@ export function TransactionItem(props: TransactionItemProps) {
           <StyledDepositText>Deposit</StyledDepositText>
         )}
       </StyledOrderBlock>
-      {orderNumber ? (
-        <StyledOrderText>- {price}$</StyledOrderText>
-      ) : (
+      {orderNumber && <StyledOrderText>- {price}$</StyledOrderText>}
+      {status === "completed" && (
         <StyledDepositText>+ {price}$</StyledDepositText>
+      )}
+      {status === "submitted" && (
+        <StyledPendingText>pending {price}$</StyledPendingText>
       )}
     </StyledTransactionItemWrapper>
   );
@@ -54,4 +57,8 @@ const StyledOrderText = styled(Text.h3)`
 
 const StyledDepositText = styled(Text.h3)`
   color: ${(props) => props.theme.colors.green};
+`;
+
+const StyledPendingText = styled(Text.h3)`
+  color: ${(props) => props.theme.colors.darkGray};
 `;
